@@ -48,11 +48,12 @@ export default function Notebook() {
     <div>
       <QuantityNote selectQuantity={selectQuantity} />
       <div className="main-container container">
-        {quanityList.map(el => {
+        <List addListitem={addListitem} listContent={listContent} removeListItem={removeListItem} changeListitem={changeListitem} />
+        {/*{quanityList.map(el => {
           const listId = uuidv4();
           return (
             <List key={listId} id={listId} addListitem={addListitem} listContent={listContent} removeListItem={removeListItem} changeListitem={changeListitem} />)
-        })}
+        })}*/}
       </div>
     </div>
   )
