@@ -95,6 +95,10 @@ h6 {
   font-weight: 400;
 }
 
+button:focus {
+  background: none;
+}
+
 body {
   background-color: var(--color-back);
 
@@ -108,20 +112,51 @@ body {
 }
 
 .main-container>div {
-  width: 33%;
+  width: 50%;
 }
 
 .collection.with-header .collection-header {
   background-color: var(--color-list);
 }
 
+.radio-container {
+  background-color: var(--color-list);
+  padding: 20px;
+}
+
 .radio-container h4 {
-  margin-top: 50px;
   color: var(--color-text);
 }
 
-.delete-icon {
+.secondary-content {
+  background: none;
+}
+
+.delete-icon,
+.create-icon {
   color: var(--color-danger);
+  transition: 0.5s ease;
+}
+
+.create-icon,
+.add-icon {
+  color: var(--color-accent);
+}
+
+.delete-icon:hover,
+.create-icon:hover,
+.add-icon:hover {
+  color: var(--color-text);
+}
+
+.delete-icon:active,
+.create-icon:active,
+.add-icon:active {
+  transform: scale(1.3);
+}
+
+.create-icon {
+  margin-right: 5px;
 }
 
 [type="checkbox"]:checked+span:not(.lever):before {
@@ -149,4 +184,32 @@ body {
 [type="radio"]:checked+span,
 [type="checkbox"]+span:not(.lever) {
   color: var(--color-text);
+}
+
+input[type=text]:focus {
+  border-bottom: 1px solid var(--color-text) !important;
+  box-shadow: 0 1px 0 0 var(--color-text) !important;
+}
+
+input[type=text] {
+  max-width: 90%;
+}
+
+.collection-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list-item {
+  display: flex;
+}
+
+.list-item label {
+  flex-grow: 1;
+}
+
+label input[type="checkbox"]:checked+.label-content {
+  text-decoration: line-through;
+  color: grey;
 }
