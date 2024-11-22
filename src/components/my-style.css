@@ -112,7 +112,7 @@ body {
 }
 
 .main-container>div {
-  width: 50%;
+  width: 49%;
 }
 
 .collection.with-header .collection-header {
@@ -122,6 +122,7 @@ body {
 .value-container {
   background-color: var(--color-list);
   padding: 20px;
+  margin-top: 50px;
 }
 
 .value-container h4 {
@@ -178,6 +179,7 @@ input[type=text] {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: var(--color-text);
 }
 
 .list-item {
@@ -186,6 +188,7 @@ input[type=text] {
 
 .list-item label {
   flex-grow: 1;
+  color: var(--color-text);
 }
 
 label input[type="checkbox"]:checked+.label-content {
@@ -209,4 +212,10 @@ label input[type="checkbox"]:checked+.label-content {
 .error-message {
   font-size: 12px;
   color: var(--color-danger);
+}
+
+@media (max-width: 480px) {
+  .main-container>div {
+    width: 100%;
+  }
 }

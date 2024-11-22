@@ -6,7 +6,7 @@ export default function QuantityNote({ selectQuantity }) {
 
 
   const clickValueBtn = () => {
-    const input = document.querySelector('.list-input');
+    const input = document.querySelector('.value-input-list');
     const value = Number(input.value);
 
     if (!value || value <= 0) {
@@ -26,6 +26,14 @@ export default function QuantityNote({ selectQuantity }) {
     seterrorMesage(false);
   };
 
+
+  const handleKeyPress = (evt) => {
+    if (evt.key === 'Enter') {
+      clickValueBtn();
+    }
+  }
+
+
   return (
     <>
       <div className="value-container container" >
@@ -34,7 +42,7 @@ export default function QuantityNote({ selectQuantity }) {
         </h4>
         <div className="value-input">
           <label className="collection-input">
-            <input type="text" className="list-input" />
+            <input type="text" className="value-input-list" onKeyDown={handleKeyPress} />
           </label>
 
           <button className="btn input-btn" onClick={clickValueBtn}>сгенерировать</button>
