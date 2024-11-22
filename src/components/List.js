@@ -1,14 +1,26 @@
 import ListItem from "./ListItem"
+import { v4 as uuidv4 } from "uuid";
 
-export default function List({ addListitem, listContent }) {
+
+export default function List({ addListitem, listContent, removeListItem, changeListitem }) {
 
   function clickInput() {
-    const inputValue = document.querySelector('.list-input');
-    if (inputValue.value) {
-      addListitem(inputValue.value);
-      inputValue.value = '';
+    const input = document.querySelector('.list-input');
+    if (input.value) {
+      const newObject = {
+        id: uuidv4(),
+        title: input.value,
+      }
+      addListitem(newObject);
+      input.value = '';
     } else {
       return;
+    }
+  }
+
+  const handleKeyPress = (evt) => {
+    if (evt.key === 'Enter') {
+      clickInput();
     }
   }
 
@@ -19,13 +31,15 @@ export default function List({ addListitem, listContent }) {
         <li className="collection-item">
           <div>
             <label className="collection-input">
-              <input type="text" className="list-input" />
+              <input type="text" className="list-input" onKeyDown={handleKeyPress} />
               <button className="secondary-content" onClick={clickInput}><i className="material-icons add-icon">add</i></button>
             </label>
-            <span>what i must do..?</span>
+            <span>что же я должен сделать..?</span>
           </div>
         </li>
-        {listContent.map((el, index) => <ListItem key={index} title={el} />)}
+        {listContent.map((el) => {
+          return <ListItem key={el.id} {...el} removeListItem={removeListItem} changeListitem={changeListitem} />
+        })}
       </ul>
     </div>
   )
