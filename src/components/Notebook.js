@@ -2,22 +2,24 @@ import './my-style.css';
 import List from './List';
 import QuantityNote from './QuantityNote';
 import { v4 as uuidv4 } from "uuid";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { ListContext } from '../context';
+
+
 
 export default function Notebook() {
-  const [listContent, setListContent] = useState([]);
   const [quanityList, setQuanityList] = useState([1]);
+
+  const { getListitem } = useContext(ListContext);
 
   useEffect(() => {
     const locallist = localStorage.getItem('list#1');
     if (locallist) {
-      setListContent(JSON.parse(locallist));
+      getListitem(JSON.parse(locallist));
     }
+    //eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('list#1', JSON.stringify(listContent));
-  }, [listContent]);
 
   const selectQuantity = (value) => {
     let currentValue = parseInt(value);
@@ -28,27 +30,11 @@ export default function Notebook() {
   }
 
 
-  const addListitem = (item) => {
-    setListContent([...listContent, item]);
-  };
-
-  const removeListItem = (id) => {
-    setListContent(listContent.filter(el => el.id !== id));
-  };
-
-  const changeListitem = (id) => {
-    const input = document.querySelector('.list-input');
-
-    const currentIndex = listContent.findIndex(el => el.id === id);
-    input.value = listContent[currentIndex].title;
-    removeListItem(id);
-  };
-
   return (
     <div>
       <QuantityNote selectQuantity={selectQuantity} />
       <div className="main-container container">
-        <List addListitem={addListitem} listContent={listContent} removeListItem={removeListItem} changeListitem={changeListitem} />
+        <List />
         {/*{quanityList.map(el => {
           const listId = uuidv4();
           return (

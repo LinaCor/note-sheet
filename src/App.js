@@ -1,9 +1,15 @@
 import './App.css';
 import Notebook from './components/Notebook';
+import { ContextProvider } from './context';
+
+
+
 function App() {
   return (
     <div className="App">
-      <Notebook />
+      <ContextProvider>
+        <Notebook />
+      </ContextProvider>
     </div>
   );
 }

@@ -1,8 +1,12 @@
 import ListItem from "./ListItem"
 import { v4 as uuidv4 } from "uuid";
+import { useContext } from "react";
+import { ListContext } from "../context";
 
 
-export default function List({ addListitem, listContent, removeListItem, changeListitem }) {
+export default function List() {
+
+  const { listItems, addNewListItem } = useContext(ListContext);
 
   function clickInput() {
     const input = document.querySelector('.list-input');
@@ -10,8 +14,9 @@ export default function List({ addListitem, listContent, removeListItem, changeL
       const newObject = {
         id: uuidv4(),
         title: input.value,
+        isChecked: false,
       }
-      addListitem(newObject);
+      addNewListItem(newObject);
       input.value = '';
     } else {
       return;
@@ -31,14 +36,16 @@ export default function List({ addListitem, listContent, removeListItem, changeL
         <li className="collection-item">
           <div>
             <label className="collection-input">
-              <input type="text" className="list-input" onKeyDown={handleKeyPress} />
+              <input type="text" className="list-input"
+                onKeyDown={handleKeyPress}
+              />
               <button className="secondary-content" onClick={clickInput}><i className="material-icons add-icon">add</i></button>
             </label>
             <span>что же я должен сделать..?</span>
           </div>
         </li>
-        {listContent.map((el) => {
-          return <ListItem key={el.id} {...el} removeListItem={removeListItem} changeListitem={changeListitem} />
+        {listItems.map((el) => {
+          return <ListItem key={el.id} {...el} />
         })}
       </ul>
     </div>
