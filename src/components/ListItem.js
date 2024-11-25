@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { ListContext } from "../context";
 
-export default function ListItem({ title, id, isChecked }) {
+export default function ListItem({ title, id, isChecked, indexList }) {
 
   const { removeListItem, changeListitem, isItemChecked } = useContext(ListContext);
 
   const handleChecked = (evt) => {
     if (evt.target.checked || !evt.target.checked) {
-      isItemChecked(id);
+      isItemChecked(id, indexList);
     }
   }
 
@@ -21,10 +21,10 @@ export default function ListItem({ title, id, isChecked }) {
         <span className="label-content">{title}</span>
       </label>
       <button className="secondary-content"
-        onClick={() => changeListitem(id)}
+        onClick={() => changeListitem(id, indexList)}
       ><i className="material-icons create-icon">create</i></button>
       <button className="secondary-content"
-        onClick={() => removeListItem(id)}
+        onClick={() => removeListItem(id, indexList)}
       ><i className="material-icons delete-icon">delete</i></button>
     </li>
   );

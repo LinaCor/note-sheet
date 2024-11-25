@@ -1,6 +1,6 @@
 export const reducer = (state, { type, payload }) => {
-  switch (type) {
 
+  switch (type) {
     case 'LOAD':
       return {
         ...state,
@@ -10,49 +10,73 @@ export const reducer = (state, { type, payload }) => {
     case 'DELETE':
       return {
         ...state,
-        listItems: state.listItems.filter(el => el.id !== payload.id),
-      }
+        listItems: state.listItems.map((list, index) => {
+          if (index === payload.index) {
+            return {
+              ...list,
+              items: list.items.filter(el => el.id !== payload.id)
+            };
+          }
+          return list;
+        }),
+      };
 
     case 'CHANGE':
-      const input = document.querySelector('.list-input');
-      const currentIndex = state.listItems.findIndex(el => el.id === payload.id);
-
-      input.value = state.listItems[currentIndex].title;
-      const newArr = state.listItems.filter(el => el.id !== payload.id);
-
+      const input = document.querySelector(`.list-input-${payload.index}`);
       return {
         ...state,
-        listItems: newArr
-      }
+        listItems: state.listItems.map((list, index) => {
+          if (index === payload.index) {
+            const currentTitleArray = list.items.filter(el => el.id === payload.id);
+            const currentTitle = currentTitleArray[0].title;
+            input.value = currentTitle;
+            return {
+              ...list,
+              items: list.items.filter(el => el.id !== payload.id)
+            };
+          }
+          return list;
+        }),
+      };
 
     case 'ADD':
-      const newList = [...state.listItems, payload];
-      localStorage.setItem('list#1', JSON.stringify(newList));
       return {
         ...state,
-        listItems: newList,
+        listItems: state.listItems.map((list, index) => {
+          if (index === payload.index) {
+            return {
+              ...list,
+              items: [...list.items, payload.item]
+            };
+          }
+          return list;
+        }),
       }
 
     case 'CHECKED':
-      const indexCheck = state.listItems.findIndex(el => el.id === payload.id);
-
-      const checkArr = state.listItems.map((el, index) => {
-        if (index === indexCheck) {
-          return {
-            ...el,
-            isChecked: !el.isChecked,
-          }
-        } else {
-          return el;
-        }
-      });
-
-      localStorage.setItem('list#1', JSON.stringify(checkArr));
-
       return {
         ...state,
-        listItems: checkArr,
-      }
+        listItems: state.listItems.map((list, index) => {
+          if (index === payload.index) {
+            const newArr = list.items.map((el) => {
+              if (el.id === payload.id) {
+                return {
+                  ...el,
+                  isChecked: !el.isChecked,
+                }
+              } else {
+                return el;
+              }
+            })
+            return {
+              ...list,
+              items: newArr,
+            };
+          }
+
+          return list;
+        }),
+      };
 
     default: return state;
   }
