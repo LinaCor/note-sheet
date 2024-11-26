@@ -8,17 +8,28 @@ import { ListContext } from '../context';
 
 
 export default function Notebook() {
-  const [quanityList, setQuanityList] = useState([1]);
+  const [quanityList, setQuanityList] = useState([4]);
 
-  const { getListitem } = useContext(ListContext);
+  const { getListitem, listItems } = useContext(ListContext);
 
-  //useEffect(() => {
-  //  const locallist = localStorage.getItem('list#1');
-  //  if (locallist) {
-  //    getListitem(JSON.parse(locallist));
-  //  }
-  //  //eslint-disable-next-line
-  //}, []);
+  useEffect(() => {
+    const locallist = localStorage.getItem('allList');
+    if (locallist) {
+      getListitem(JSON.parse(locallist));
+
+      const sheetsHasItem = JSON.parse(locallist).filter(el => el.items.length !== 0);
+      if (sheetsHasItem.length > 0) {
+        const lastItemId = sheetsHasItem.pop().id;
+        selectQuantity(lastItemId);
+      }
+    }
+    //eslint-disable-next-line
+  }, []);
+
+
+  useEffect(() => {
+    localStorage.setItem('allList', JSON.stringify(listItems));
+  }, [listItems])
 
   const selectQuantity = (value) => {
     let currentValue = parseInt(value);

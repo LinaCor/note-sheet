@@ -6,56 +6,56 @@ import { v4 as uuidv4 } from "uuid";
 const initialState = {
   listItems: [
     {
-      id: 'list1',
+      id: '1',
       title: 'List #1',
       items: [
-        { id: uuidv4(), title: 'Облизать кактус', isChecked: true, indexList: 0 },
+        { id: uuidv4(), title: 'Погладить кактус', isChecked: true, indexList: 0 },
       ],
     },
     {
-      id: 'list2',
+      id: '2',
       title: 'List #2',
       items: [
         { id: uuidv4(), title: 'Стать королём шаманов', isChecked: false, indexList: 1 },
       ],
     },
     {
-      id: 'list3',
+      id: '3',
       title: 'List #3',
       items: [],
     },
     {
-      id: 'list4',
+      id: '4',
       title: 'List #4',
       items: [],
     },
     {
-      id: 'list5',
+      id: '5',
       title: 'List #5',
       items: [],
     },
     {
-      id: 'list6',
+      id: '6',
       title: 'List #6',
       items: [],
     },
     {
-      id: 'list7',
+      id: '7',
       title: 'List #7',
       items: [],
     },
     {
-      id: 'list8',
+      id: '8',
       title: 'List #8',
       items: [],
     },
     {
-      id: 'list9',
+      id: '9',
       title: 'List #9',
       items: [],
     },
     {
-      id: 'list10',
+      id: '10',
       title: 'List #10',
       items: [],
     }],
