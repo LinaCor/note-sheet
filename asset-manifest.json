@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/note-sheet/static/css/main.f50db731.css",
+    "main.js": "/note-sheet/static/js/main.85203dc9.js",
+    "index.html": "/note-sheet/index.html",
+    "main.f50db731.css.map": "/note-sheet/static/css/main.f50db731.css.map",
+    "main.85203dc9.js.map": "/note-sheet/static/js/main.85203dc9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f50db731.css",
+    "static/js/main.85203dc9.js"
+  ]
+}
